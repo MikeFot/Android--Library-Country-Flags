@@ -9,7 +9,7 @@ final int versionMajor = 1
 final int versionMinor = 0
 final int versionPatch = 0
 
-final String gitHubRepo = 'MikeFot/Java--Steam-Loader'
+final String gitHubRepo = 'MikeFot/Android--Library-Country-Flags'
 final String artifactName = 'android-country-flags'
 final String artifactDesc = 'Android library containing country flag assets'
 final String[] tags = ['flags', 'java', 'android']
