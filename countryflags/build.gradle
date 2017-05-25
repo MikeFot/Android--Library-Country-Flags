@@ -7,7 +7,7 @@ targetCompatibility = "1.7"
 
 final int versionMajor = 1
 final int versionMinor = 0
-final int versionPatch = 0
+final int versionPatch = 1
 
 final String gitHubRepo = 'MikeFot/Android--Library-Country-Flags'
 final String artifactName = 'android-country-flags'
@@ -28,8 +28,6 @@ android {
         versionCode 1
         versionName semanticVersion
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -47,9 +45,14 @@ publishing {
             artifactId artifactName
             version semanticVersion
 
-            artifact bundleRelease
-            artifact androidJavadocsJar
-            artifact androidSourcesJar
+            artifact javadocJar
+            artifact sourcesJar
+            artifact("$buildDir/outputs/aar/countryflags-release.aar")
+        }
+    }
+    repositories {
+        maven {
+            url "$buildDir/repo"
         }
     }
 }
@@ -73,7 +76,6 @@ bintray {
         licenses = ['Apache-2.0']
         publicDownloadNumbers = true
         githubRepo = "${gitHubRepo}"
-        githubReleaseNotesFile = 'README.md'
 
         version {
             name = semanticVersion
@@ -90,18 +92,26 @@ bintray {
         }
     }
 
-    task androidSourcesJar(type: Jar) {
-        classifier 'sources'
-        from android.sourceSets.main.java.srcDirs
+    if (project.hasProperty("android")) { // Android libraries
+        task sourcesJar(type: Jar) {
+            classifier = 'sources'
+            from android.sourceSets.main.java.srcDirs
+        }
+
+        task javadoc(type: Javadoc) {
+            source = android.sourceSets.main.java.srcDirs
+            classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        }
+    } else { // Java libraries
+        task sourcesJar(type: Jar, dependsOn: classes) {
+            classifier = 'sources'
+            from sourceSets.main.allSource
+        }
     }
 
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    task javadocJar(type: Jar, dependsOn: javadoc) {
         classifier = 'javadoc'
-        from androidJavadocs.destinationDir
+        from javadoc.destinationDir
     }
+
 }

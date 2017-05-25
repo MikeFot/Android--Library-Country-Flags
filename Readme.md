@@ -1,1 +1,0 @@
-Android library containing country flag assets.
