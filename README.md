@@ -1,3 +1,5 @@
+# Android Country Flags
+
 Android library containing country flag assets.
 
 ## Importing into your project
@@ -16,7 +18,7 @@ allprojects {
 
 And the following to your module Gradle file:
 
-`compile 'com.michaelfotiadis:android-country-flags:1.0.1'`
+`compile 'com.michaelfotiadis:android-country-flags:1.0.3'`
 
 **Maven**
 
@@ -24,7 +26,7 @@ And the following to your module Gradle file:
 <dependency>
   <groupId>com.michaelfotiadis</groupId>
   <artifactId>android-country-flags</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.3</version>
   <type>pom</type>
 </dependency>
 ```
