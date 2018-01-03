@@ -33,3 +33,5 @@ And the following to your module Gradle file:
 
 **Bintray Project**
 https://bintray.com/mikefot/maven/android-country-flags
+
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Android%20Country%20Flags-green.svg?style=flat )]( https://android-arsenal.com/details/1/6566 )
